@@ -23,8 +23,9 @@ def detectionpile():
     
     if re=="Pile":
         conn.execute('''UPDATE pseudo
-                     SET score= score + 1,
-                     WHERE user = ewen''')
+                     SET score= score + 1
+                     WHERE user = "ewen"''')
+        conn.commit()
         return("gagné")
         #inserer base de donnée
     else:
@@ -39,14 +40,11 @@ def detectionface():
         return("gagné")
     else:
         return("perdu")
-        
-conn = sqlite3.connect('SQL.db')
+
+    
+conn = sqlite3.connect('SQL.db', timeout=10)
 cur = conn.cursor()
-cur.execute('SELECT * FROM pseudo' )
-conn.commit()
+
 
 
 print(detectionpile())
-
-conn.close()
-cur.close()
